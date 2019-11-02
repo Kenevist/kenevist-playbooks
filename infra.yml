@@ -1,9 +1,16 @@
 - hosts: dev
   remote_user: root
+  gather_facts: no
   roles:
-    - geerlingguy.docker
+    - ansible-role-docker
+    - ansible-role-postgresql
+    - bind
+
 
 - hosts: dev
   remote_user: root
+  gather_facts: no
+  become: true
+  become_user: postgres
   roles:
-    - gitlab.docker_compose
+    - postgresql-configs
